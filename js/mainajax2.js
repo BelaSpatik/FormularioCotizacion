@@ -1,12 +1,35 @@
 $(document).ready(function () {
-  //Estructura básica inicial 
+  // Header
 
+  const mediaQueryMobile = window.matchMedia('(max-width: 767px)')
+
+  var click = new Audio("sounds/mouse-click.mp3")
+  $(".banner__button").hide()
+  $(".cotizacion").hide()
+  setTimeout(function () {
+    $(".banner__button").fadeIn(1000)
+  }, 100);
+  $(".banner__button").click(function () {
+    click.play()
+    setTimeout(function () {
+      $(".banner__button").fadeOut(500)
+    }, 200);
+    setTimeout(function () {
+      $("header").addClass("animacion")
+      if (mediaQueryMobile.matches) {
+        $(".header__banner").css({"height": "unset", "margin": "3% auto"})
+      }
+  
+      $(".cotizacion").slideDown(3000)
+    }, 500);
+  })
+
+  // Estructura básica inicial DOM
   var $divRubros = $("#div-rubros");
   var $divObra = $("#div-tipo");
   var $divServicios = $("#servicios").addClass("input-select").hide();
   var $divUbicacion = $("#div-ubicacion");
   $("#mensaje").hide()
-    
   var $rubros = $("#rubros");
     
   function selectRubros () {
@@ -45,7 +68,7 @@ $(document).ready(function () {
   }
   radioButton();
     
-  // Select Rubros
+  //Select {Rubros}
 
   $rubros.on("select2:select select2:unselecting", function () {
     var $refresh = $("#servicios").empty() + $('input[name="nuevoReparacion"]').prop("checked", false) + $divServicios.slideUp();
@@ -104,7 +127,7 @@ $(document).ready(function () {
     })
   })
 
-  //Radio input - Obra nueva / Reparación
+  //Radio Input - {Obra nueva / Reparación}
     
   $radioCheck = $('input[name="nuevoReparacion"]');
     
@@ -202,10 +225,11 @@ $(document).ready(function () {
     }) 
   }) 
 
-  //Selects de Ubicación - Provincia / Departamento / Localidad
+  //Selects de Ubicación - {Provincia / Departamento / Localidad}
 
   function selectProvincias () {
-    $("#departamentos").hide() + $("#localidades").hide()
+    $("#ubicacionDepto").hide() + $("#ubicacionLoc").hide()
+    //$("#departamentos").hide() + $("#localidades").hide() -> No ocultar, sino no aparecen las alertas
     $.ajax ({
       type: "GET",
       url: "https://apis.datos.gob.ar/georef/api/provincias?orden=nombre",
@@ -216,12 +240,20 @@ $(document).ready(function () {
         })
       }
     });
-    $("#provincias").select2({
-      placeholder: "Seleccione una provincia",
-      width: "100%"
-    })
   }
   selectProvincias()
+  
+  $("#ubicacionProv").css("width", "100%")
+  $("#provincias").select2({
+    placeholder: "Seleccione una provincia",
+    width: "100%"
+  }).on('select2:open', function(e) {
+    $('.select2-dropdown').hide();
+    setTimeout(function() {
+      $('.select2-dropdown').slideDown("slow");
+    }, 0);
+  })
+
   
   $("#provincias").on("select2:select select2:unselecting", function () {
     $("#departamentos").empty() + $("#localidades").empty()
@@ -230,40 +262,10 @@ $(document).ready(function () {
       type: "GET",
       url: "https://apis.datos.gob.ar/georef/api/departamentos?orden=nombre&max=529",
       dataType: "json",
-      success: function (response) {
-        $("#departamentos").fadeIn(500)
-        var $opcionDefault = $(`<option>Seleccione un departamento</option>`).attr("value", "").prop({"selected": "true", "hidden": "true"}).css({"text-align-last": "center"})
-        $("#departamentos").prepend($opcionDefault)
-        $("#departamentos").option = response.departamentos.sort().forEach(function (index) {
-          var $provSeleccionada = $("#provincias").val();
-          if($provSeleccionada == index.provincia.nombre) {
-            $("#departamentos").append($(`<option>${index.nombre}</option>`))
-          }
-        })
-      }
-    });
-    $("#provincias").select2({
-      width: "50%"
-    })
-    $("#departamentos").select2({
-      placeholder: "Seleccione un departamento",
-      width: "50%"
-    }).fadeIn(2000);
-  })
-  
-  $("#departamentos").on("select2:select select2:unselecting", function () {
-    $("#localidades").empty()
-    $.ajax ({
-      type: "GET",
-      url: "https://apis.datos.gob.ar/georef/api/localidades?aplanar=true&campos=estandar&max=4142&exacto=true",
-      dataType: "json",
       beforeSend: function () {
-        $("#localidades").fadeIn(500)
-        var $opcionDefault = $(`<option>Procesando</option>`).attr({"value": "", "id": "default"}).prop({"selected": "true", "hidden": "true"}).css({"textAlignLast": "center"})
-        $("#localidades").prepend($opcionDefault)
-        $("#localidades").select2({
+        $("#departamentos").select2({
           placeholder: "Procesando",
-          width: "33.3%",
+          width: "50%",
           templateSelection: function (option) {
             if (option.id.length == 0 ) {
               return option.text + " " + "<img style='width: 15px' src='./css/jquery-validation-images/loading.gif'/>"
@@ -274,13 +276,82 @@ $(document).ready(function () {
           escapeMarkup: function (m) {
             return m;
           }
-        }).fadeIn(500)
+        })
+      }
+      ,
+      success: function (response) {
+        var $opcionDefault = $(`<option>Seleccione un departamento</option>`).attr("value", "").prop({"selected": "true", "hidden": "true"}).css({"text-align-last": "center"})
+        $("#departamentos").prepend($opcionDefault)
+        $("#departamentos").option = response.departamentos.sort().forEach(function (index) {
+          var $provSeleccionada = $("#provincias").val();
+          if($provSeleccionada == index.provincia.nombre) {
+            $("#departamentos").append($(`<option>${index.nombre}</option>`))
+          }
+        })
+      }
+    });
+    $("#ubicacionProv").css("width", "50%")
+    $("#ubicacionDepto").css("width", "50%").fadeIn(500)
+    $("#departamentos").select2({
+      placeholder: "Seleccione un departamento",
+      width: "100%"
+    }).on('select2:open', function(e) {
+      $('.select2-dropdown').hide();
+      setTimeout(function() {
+        $('.select2-dropdown').slideDown("slow");
+      }, 0);
+    })
+
+    if (mediaQueryMobile.matches) {
+      $("#ubicacionProv").css("width", "100%")
+      $("#ubicacionDepto").css("width", "100%")
+    }
+  })
+
+  $("#departamentos").on("select2:select select2:unselecting", function () {
+    $("#localidades").empty()
+    $.ajax ({
+      type: "GET",
+      url: "https://apis.datos.gob.ar/georef/api/localidades?aplanar=true&campos=estandar&max=4142&exacto=true",
+      dataType: "json",
+      beforeSend: function () {
+        var $opcionDefault = $(`<option>Procesando</option>`).attr({"value": "", "id": "default"}).prop({"selected": "true", "hidden": "true"}).css({"textAlignLast": "center"})
+        $("#localidades").prepend($opcionDefault)
+        $("#localidades").select2({
+          placeholder: "Procesando",
+          width: "100%",
+          templateSelection: function (option) {
+            if (option.id.length == 0 ) {
+              return option.text + " " + "<img style='width: 15px' src='./css/jquery-validation-images/loading.gif'/>"
+            } else {
+                return option.text;
+            }
+          },
+          escapeMarkup: function (m) {
+            return m;
+          }
+        })
       },
       success: function (response) {
         $("#localidades").select2({
           placeholder: "Seleccione una localidad",
-          width: "33.3%"
-        })
+          width: "100%"
+        }).on('select2:open', function(e) {
+          $('.select2-dropdown').hide();
+          setTimeout(function() {
+            $('.select2-dropdown').slideDown("slow");
+          }, 0);
+        }).on('select2:closing', function(e) {
+          e.preventDefault();
+          setTimeout(function(e) {
+            $('.select2-dropdown').slideUp("slow", function() {
+              $("#localidades").select2('destroy').select2({
+                placeholder: "Seleccione una localidad",
+                width: "100%"
+            });
+          }, 0);
+        });
+      })
         $("#localidades").option = response.localidades.sort().forEach(function (index) {
           var $provSeleccionada = $("#provincias").val();
           var $deptoSeleccionado = $("#departamentos").val();
@@ -291,12 +362,15 @@ $(document).ready(function () {
         }) 
       }
     });
-    $("#provincias").select2({
-      width: "33.3%"
-    })
-    $("#departamentos").select2({
-      width: "33.3%"
-    });
+    $("#ubicacionProv").css("width", "33.3%")
+    $("#ubicacionDepto").css("width", "33.3%")
+    $("#ubicacionLoc").css("width", "33.3%").fadeIn(500)
+
+    if (mediaQueryMobile.matches) {
+      $("#ubicacionProv").css("width", "100%")
+      $("#ubicacionDepto").css("width", "100%")
+      $("#ubicacionLoc").css("width", "100%")
+    }
   })
 
   //SessionStorage
@@ -355,12 +429,21 @@ $(document).ready(function () {
   
   function validacion () {
     form1 = null;
+
+    jQuery.validator.addMethod("lettersandspaces", function(value, element) {
+      return this.optional(element) || /^[a-zA-z]+ (.+\s+.*)|(.*\s+.+)$/i.test(value);
+    }, "Por favor, ingrese su nombre completo");
+    jQuery.validator.addMethod("nonumbers", function(value, element) {
+      return this.optional(element) || /^([^0-9]*)$/.test(value);
+    }, "Por favor, ingrese un nombre válido");
     
     $("form[name='myForm']").validate({
       rules: {
         nombreCompleto: {
           required: true,
-          lettersonly: true
+          lettersandspaces: true,
+          nonumbers: true,
+          minlength: 6
         },
         telefono: {
           required: true,
@@ -417,7 +500,7 @@ $(document).ready(function () {
       messages: {
         nombreCompleto: {
           required: "Por favor, ingrese su nombre completo",
-          lettersonly: "Por favor, ingrese un nombre válido"
+          minlength: "Por favor, ingrese su nombre completo", 
         },
         telefono: {
           required: "Por favor, ingrese un número de contacto",
@@ -453,6 +536,9 @@ $(document).ready(function () {
       },
       errorPlacement: function(error, element) {
         if(element.is(":radio")) {
+          if (mediaQueryMobile.matches) {
+            error.css({"marginTop": "10px", "width": "100%", "marginLeft": "65px"})
+          }
           $divObra.append(error);
         } else if (element.is("#div-rubros .error")){
           $divRubros.append(error)
@@ -468,6 +554,7 @@ $(document).ready(function () {
         }
       },
       submitHandler: function (form) {
+        click.play()
         form1 = form;
         const formFullData = {
           nombre: form1.elements.nombreCompleto.value,
@@ -486,7 +573,7 @@ $(document).ready(function () {
         newUser.ejecutar();
         console.log(formFullData);
         $(".cotizacion__titulo").fadeOut("slow", function () {
-          var $titulo = $(`<span>Formulario enviado&nbsp<img src="./images/greentick.png"/></span>`).attr("font-weight", "900").addClass("mensaje__titulo");
+          var $titulo = $(`<span>Formulario enviado&nbsp<img class="animate__animated animate__wobble" src="./images/greentick.png"/></span>`).attr("font-weight", "900").addClass("mensaje__titulo");
           $("#mensaje").prepend($titulo);
           $("form[name='myForm']").fadeOut("slow", function () {
             $("#mensaje").fadeIn(100);

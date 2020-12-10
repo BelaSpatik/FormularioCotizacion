@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/jquery-validation-demo.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="css/estilos.css">
     <script src="js/jquery.js"></script>
     <script src="js/jquery-validate-min.js"></script>
@@ -14,13 +15,15 @@
     <script src="js/select2.min.js"></script>
     <script src="js/servicios.js"></script>
 <!--<script defer src="js/mainjquery.js"></script>-->
-<script defer src="js/mainajax.js"></script>
+<script defer src="js/mainajax2.js"></script>
 </head>
 <body>
     <header>
-        <nav class="header__nav">
-            <img class="nav__logo" src="images/logo5.png" alt="logo">
-            <div class="nav__navbar">
+            <nav class="header__nav">
+                <img class="nav__logo animate__animated animate__tada animate__slow" src="images/logo5.png" alt="logo">
+            <a href="#navbar"><img src="images/menu1.png" class="open" alt="menu"></a>
+            <ul class="nav__navbar" id="navbar">
+                <a href="#"><img src="images/cross2.png" class="close" alt="cerrar"></a>
                 <li class="navbar__item">
                     <a class="navbar__link" href="">Inicio</a>
                 </li>
@@ -33,11 +36,16 @@
                 <li class="navbar__item">
                     <a class="navbar__link" href="">Contacto</a>
                 </li>
-            </div>
+            </ul>
         </nav>
         <div class="header__banner">
-            <h1 class="banner__titulo">¿Querés cotizar tu próximo proyecto?</h1>
-        <h2 class="banner_descripcion">Completá el siguiente formulario con tus datos y en los próximos días nos estaremos comunicando para acercarte una cotización aproximada.</h2>
+            <h1 class="banner__titulo animate__animated animate__pulse">¿Querés cotizar tu próximo proyecto?</h1>
+        <h2 class="banner__descripcion animate__animated animate__slideInUp animate__slow">Completá el siguiente formulario con tus datos y en los próximos días nos estaremos comunicando para acercarte una cotización aproximada.</h2>
+        <button class="banner__button <!--animate__animated animate__fadeIn animate__slow-->">
+            <img class="left" src="images/3.png">
+            <span>Empezar</span>
+            <img class="right" src="images/4.png">
+        </button>
         </div>
     </header>
     <section class="cotizacion">
@@ -65,192 +73,19 @@
                     <input class="radio" type="radio" name="nuevoReparacion" id="reparacion" value="reparacion">
                 </label>
             </div>
-
             <div id="servicios"></div>
-
-            <fieldset class="formulario__item--datosCs">
-                <legend>Albañilería: </legend>
-                <div id="albanileriaNuevo" class="formulario__item--albanileriaNuevo">
-                    <select name="servicio-nuevo" id="servicio-nuevo">
-                        <option value="construccion" default>Construcción</option>
-                    </select>
-                </div>
-                <div class="formulario__item--albanileriaRep">
-                    <label for="servicio-rep"> Eliga el servicio requerido: </label>
-                    <select name="servicio-rep" id="servicio-rep">
-                        <option value="revoque">Revoque</option>
-                        <option value="terminaciones">Terminaciones</option>
-                        <option value="mamposteria">Mampostería</option>
-                        <option value="otros">Otros</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <fieldset class="formulario__item--datosCs">
-                <legend>Electricidad: </legend>
-                <div class="formulario__item--electricidadNuevo">
-                    <label for="servicio-nuevo"> Eliga el servicio requerido: </label>
-                    <select name="servicio-nuevo" id="servicio-nuevo">
-                        <option value="instalaciones">Instalaciones</option>
-                        <option value="tableros">Tableros</option>
-                        <option value="habilitaciones">Habilitaciones</option>
-                    </select>
-                </div>
-                <div class="formulario__item--electricidadRep">
-                    <label for="servicio-rep"> Eliga el servicio requerido: </label>
-                    <select name="servicio-rep" id="servicio-rep">
-                        <option value="instalaciones">Instalaciones</option>
-                        <option value="luminaria-int">Luminarias internas</option>
-                        <option value="luminaria-ext">Luminarias externas</option>
-                        <option value="habilitaciones">Habilitaciones</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <fieldset class="formulario__item--datosCs">
-                <legend>Gas: </legend>
-                <div class="formulario__item--gasNuevo">
-                    <select name="servicio-nuevo" id="servicio-nuevo">
-                        <option value="instalaciones" default>Instalaciones</option>
-                    </select>
-                </div>
-                <div class="formulario__item--gasRep">
-                    <label for="servicio-rep"> Eliga el servicio requerido: </label>
-                    <select name="servicio-rep" id="servicio-rep">
-                        <option value="fugas">Fugas</option>
-                        <option value="reconexiones">Reconexiones</option>
-                        <option value="reparaciones">Reparaciones</option>
-                        <option value="habilitaciones">Habilitaciones</option>
-                    </select>
-                </div>
-                <div class="formulario__item--gasArea">
-                    <label for="servicio-sector"> Sector: </label>
-                    <select name="servicio-sector" id="servicio-sector">
-                        <option value="cocina">Cocina</option>
-                        <option value="baño">Baño</option>
-                        <option value="cloacas">Cloacas</option>
-                        <option value="desagues">Desagües</option>
-                        <option value="piletas">Piletas</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <fieldset class="formulario__item--datosCs">
-                <legend>Pintura: </legend>
-                <div class="formulario__item--pinturaNuevo">
-                    <label for="servicio-nuevo"><b>Elija el servicio requerido: </b></label>
-                    <select name="servicio-nuevo" id="servicio-nuevo">
-                        <option value="aplicacion">Aplicación</option>
-                        <option value="revestimiento">Revestimiento</option>
-                        <option value="impermeabilizacion">Impermeabilización</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <fieldset class="formulario__item--datosCs">
-                <legend>Pisos: </legend>
-                <div class="formulario__item--pisosNuevo">
-                    <label for="servicio-nuevo"><b>Elia el servicio requerido:</b></label>
-                    <select name="servicio-nuevo" id="servicio-nuevo">
-                        <option value="instalaciones">Instalaciones</option>
-                        <option value="recambios">Recambios</option>
-                    </select>
-                </div>
-                <label for="servicio-tipo"> Tipo: </label>
-                    <select name="servicio-tipo" id="servicio-tipo">
-                        <option value="flotantes">Piso flotante</option>
-                        <option value="alfombras">Piso alfombrado</option>
-                        <option value="cerámica">Piso de cerámica</option>
-                    </select>
-            </fieldset>
-
-            <fieldset class="formulario__item--datosCs">
-                <legend>Placas: </legend>
-                <div class="formulario__item--placasNuevo">
-                    <select name="servicio-nuevo" id="servicio-nuevo">
-                        <option value="colocacion">Colocación</option>
-                    </select>
-                </div>
-                <div class="formulario__item--placasTipo">
-                    <label for="servicio-tipo"> Eliga el servicio requerido: </label>
-                    <select name="servicio-tipo" id="servicio-tipo">
-                        <option value="ambientacion">Ambientación</option>
-                        <option value="paredes">Paredes</option>
-                        <option value="cielorraso">Cielorraso</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <fieldset class="formulario__item--datosCs">
-                <legend>Plomería: </legend>
-                <div class="formulario__item--plomeriaNuevo">
-                    <select name="servicio-nuevo" id="servicio-nuevo">
-                        <option value="instalaciones" default>Instalaciones</option>
-                    </select>
-                </div>
-                <div class="formulario__item--plomeriaRep">
-                    <label for="servicio-rep"> Eliga el servicio requerido: </label>
-                    <select name="servicio-rep" id="servicio-rep">
-                        <option value="fugas">Pérdidas</option>
-                        <option value="reconexiones">Reconexiones</option>
-                        <option value="reparaciones">Reparaciones</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <fieldset class="formulario__item--datosCs">
-                <legend>Techos: </legend>
-                <div class="formulario__item--techosNuevo">
-                    <select name="servicio-nuevo" id="servicio-nuevo">
-                        <option value="instalacion" default>Instalación</option>
-                    </select>
-                </div>
-                <div class="formulario__item--techoRep">
-                    <select name="servicio-rep" id="servicio-rep">
-                        <option value="reparaciones">Reparaciones</option>
-                    </select>
-                </div>
-                <div class="formulario__item--techoTipo">
-                    <label for="servicio-tipo">Tipo: </label>
-                    <select name="servicio-tipo" id="servicio-tipo">
-                        <option value="pergolas">Pérgolas</option>
-                        <option value="galerias">Galerias</option>
-                        <option value="aleros">Aleros</option>
-                        <option value="otros">Otros</option>
-                    </select>
-                </div>
-            </fieldset>
-
-            <fieldset class="formulario__item--datosCs">
-                <legend>Zinguería: </legend>
-                    <div class="formulario__item--zingueriaNuevo">
-                        <select name="servicio-nuevo" id="servicio-nuevo">
-                            <option value="instalaciones">Instalaciones</option>
-                        </select>
-                    </div>
-                    <div class="formulario__item--zingueriaRep">
-                        <select name="servicio-rep" id="servicio-rep">
-                            <option value="reparaciones">Reparaciones</option>
-                            <option value="limpieza">Limpieza</option>
-                        </select>
-                    </div>
-                    <div class="formulario__item--zingueriaTipo">
-                        <label for="servicio-repTipo">Eliga el servicio requerido: </label>
-                        <select name="servicio-repTipo" id="servicio-repTipo">
-                            <option value="desagues">Desagües</option>
-                            <option value="canaletas">Canaletas</option>
-                            <option value="bajadas">Bajadas</option>
-                        </select>
-                    </div>
-            </fieldset>
-            
             <div id="div-ubicacion" class="input-select formulario__item--datosCs">
-                <!--<input type="text" name="ubicacion" id="ubicacion" placeholder="Ubicación de la obra a realizar">-->
+                <div id="ubicacionProv">
                     <select name="ubicacionProv" id="provincias">
                         <option value="" selected hidden>Seleccione una provincia</option>
                     </select>
+                </div>
+                <div id="ubicacionDepto">
                     <select name="ubicacionDepto" id="departamentos"></select>
+                </div>
+                <div id="ubicacionLoc">
                     <select name="ubicacionLoc" id="localidades"></select>
+                </div>
             </div>
             <div class="formulario__item--datosCs">
                 <input type="text" name="dimension" id="dimension" placeholder="Dimensión (metros²)*">
@@ -262,8 +97,8 @@
                 <input id="submit" type="submit" value="Enviar">
             </div>
         </form>
-        <div id="mensaje"></div>
     </section>
+    <section class="animate__animated animate__pulse" id="mensaje"></section>
     <footer>
     </footer>
 </body>

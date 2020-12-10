@@ -10,8 +10,9 @@ rgb(129, 207, 11)
     padding: 0px;
     box-sizing: border-box; 
 }
+
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background-color: #d00000;
+    background-color: #FFC300
 }
 
 .select2-container--default .select2-results__option[aria-selected=true] {
@@ -19,13 +20,13 @@ rgb(129, 207, 11)
 }
 
 .select2-container--default .select2-selection--single {
-    background-color: #d00000;
-    /*width: 100%;*/
+    background: rgb(192,57,43);
+    background: linear-gradient(90deg, rgba(192,57,43,1) 0%, rgba(255,36,0,1) 50%, rgba(192,57,43,1) 100%);
     text-align-last: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: rgb(3, 83, 83);
     border: 1px solid silver;
-    height: 6vh;
+    height: 40px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px silver;
 }
@@ -34,15 +35,12 @@ rgb(129, 207, 11)
     overflow: hidden;
 }
 
-.select2-container--default .select2-selection--single .select2-selection__rendered[aria-labelledby="select2-provincias-container"] {
-    background-color: gold;
-}
-
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     margin-top: 5px;
     color: white;
     font-size: 15px;
     text-shadow: 1px 1px 3px black;
+    width: 100%
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -50,7 +48,7 @@ rgb(129, 207, 11)
     width: 20px;
     height: 95%;
     border-radius: 0px 3px 3px 0px;
-    box-shadow: 0px 0px 5px silver;
+    box-shadow: 0px 0px 2px black
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b{
@@ -64,8 +62,8 @@ rgb(129, 207, 11)
 .select2-container--default .select2-selection__rendered .select2-selection__placeholder {
     color: white;
     padding: 10px;
+    width: 100%
 }
-
 
 ::placeholder, textarea {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -74,7 +72,7 @@ rgb(129, 207, 11)
 }
 
 body {
-    background-color: teal;
+    background-color: black;
     background: rgb(0,128,128);
     background: linear-gradient(90deg, rgba(0,128,128,1) 0%, rgba(0,128,128,0.500437675070028) 25%, rgba(0,128,128,0.5032387955182073) 75%, rgba(0,128,128,1) 100%);
 }
@@ -83,26 +81,41 @@ header {
     height: 100vh;
     background-image: url(../images/pintura3.jpg);
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
     position: relative;
+    background-color: black;
+    transition: height 1s linear;
+
+}
+
+.animacion {
+    height: 68vh;
+    box-shadow: 1px 1px 5px #858383
 }
 
 .header__nav {
     width: 100%;
+    /*height: 80px;*/
     display: flex;
     justify-content: space-between;
-    background: rgb(255,255,255);
-    background: linear-gradient(69deg, rgba(255,255,255,0) 38%, rgba(0,128,128,0.5088410364145659) 48%, rgba(0,128,128,1) 100%);
+    /*background: rgb(255,255,255);
+    background: linear-gradient(69deg, rgba(255,255,255,0) 38%, rgba(0,128,128,0.5088410364145659) 48%, rgba(0,128,128,1) 100%);*/
     /**/
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,0) 40%, rgba(0,128,128,0.5088410364145659) 45%, rgba(0,128,128,1) 100%);
+}
+
+header .open,
+header .close {
+    display: none
 }
 
 .nav__logo {
     width: 70px;
+    position: relative;
     margin: 10px;
     margin-left: 20px;
     border-radius: 50%;
+    box-shadow: 0px 0px 5px silver;
+    z-index: 3;
 }
 
 .nav__navbar {
@@ -113,6 +126,8 @@ header {
     list-style: none;
     font-size: 18px;
     font-size: 20px;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,128,128,0.5088410364145659) 9%, rgba(0,128,128,1) 100%);
 }
 
 .navbar__item {
@@ -128,23 +143,93 @@ header {
 }
 
 .header__banner {
-    width: 50%;
-    margin: 23vh 24%;
+    width: 55%;
+    margin: 9% 20%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .header__banner .banner__titulo {
-    font-size: 39px;
-    line-height: 10vh;
+    font-size: 2.7em;
+    /*line-height: 6vh;*/
+    padding: 10px 0px
 }
 
+.header__banner .banner__descripcion {
+    margin-top: 5px;
+}
 
+.header__banner .banner__button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 300px;
+    height: 90px;
+    font-size: 1.7em;
+    font-weight: 800;
+    text-shadow: 0px 0px 3px white;
+    font-family: inherit;
+    margin: 45px auto;
+    cursor: pointer;
+    border: double 5px #62b6aa;
+    background: rgb(0,128,128);
+    background: linear-gradient(90deg, rgba(0,128,128,1) 0%, rgba(98,182,170,1) 50%, rgba(0,128,128,1) 100%);
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px #858383;
+    transition: transform 0.5s, color 0.5s, text-shadow 0.5s, border-color 0.5s;
+}
+
+.header__banner .banner__button img {
+    width: 40px;
+    border-radius: 20%;
+    margin: 0px 10px;
+}
+
+.header__banner .banner__button .left {
+    animation-name: leftarrow;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 1.5s;
+}
+
+@keyframes leftarrow {
+    0% {transform: translate(0px);}
+    25% {transform: translate(10px);}
+    50% {transform: translate(20px);}
+    75% {transform: translate(10px);}
+    100% {transform: translate(0px);}
+}
+
+.header__banner .banner__button .right {
+    animation-name: rightarrow;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 1.5s;
+}
+
+@keyframes rightarrow {
+    0% {transform: translate(0px);}
+    25% {transform: translate(-10px);}
+    50% {transform: translate(-20px);}
+    75% {transform: translate(-10px);}
+    100% {transform: translate(0px);}
+}
+
+.header__banner .banner__button:hover {
+    background: teal;
+    border-color: rgba(245, 245, 245, 0.8);
+    transform: scale(1.05);
+    color: white;
+    text-shadow: 1px 1px 5px black;
+}
+
+/*
 .cotizacion {
-    margin: 20px auto
-}
+    margin: 20px auto;
+}*/
 
-.cotizacion__titulo, .mensaje__titulo {
+.cotizacion__titulo {
     font-size: 22px;
     line-height: 8vh;
 }
@@ -156,12 +241,11 @@ header {
     padding: 20px 15px;
     background-color: white;
     box-shadow: 0px 0px 5px rgb(2, 49, 49);
-
 }
 
 .cotizacion__formulario input {
     width: 100%;
-    height: 6vh;
+    height: 40px;
     padding: 5px 10px;
     margin: 10px 0px;
     /*background-image: url(../images/pintura3.jpg);
@@ -231,6 +315,10 @@ label.error {
     box-shadow: none;
 }
 
+.cotizacion__formulario .input-radio .radio:hover, .cotizacion__formulario .formulario__item--submit input {
+    cursor: pointer
+}
+
 input[type='radio']:disabled:after {
     width: 12px;
     height: 12px;
@@ -288,10 +376,6 @@ input[type='radio']:checked:after {
     padding-bottom: 0px;
 }
 
-.cotizacion__formulario .input-select #provincias {
-    width: 100%;
-}
-
 .cotizacion__formulario .formulario__item--datosCs textarea {
     width: 100%;
     padding: 10px;
@@ -319,26 +403,152 @@ fieldset {
     margin-bottom: 15px;
     height: 6vh;
     color: white;
-    text-shadow: 1px 1px 10px #6f9101;
-    letter-spacing: 1px;
-    background-color: #8db600;
-    border: 2px solid #84ac01;
+    background: rgb(111,145,1);
+    background: linear-gradient(90deg, rgba(111,145,1,1) 0%, rgba(141,182,0,1) 50%, rgba(111,145,1,1) 100%);
+    /*text-shadow: 1px 1px 10px #6f9101;*/
+    border: none;
     border-radius: 5px;
     box-shadow: 1px 1px 3px silver;
+    transition: text-shadow 0.4s linear;
 }
 
 .cotizacion__formulario .formulario__item--submit input:hover {
-    background-color: #6f9101;
-    border: 1px solid #8db600;
-    text-shadow: 0px 0px 5px #9dcc01;
-
+    background: rgb(111,145,1);
+    text-shadow: 1px 1px 15px white;
+    border: 1px outset rgb(111,145,1);
 }
 
 #mensaje {
     width: 75%;
-    margin: auto;
-    padding: 0px 20px;
-    padding-bottom: 14px;
+    margin: 5% auto;
+    padding: 30px 25px;
     background-color: white;
+    border-radius: 10px;
+    border: 3px solid green;
     box-shadow: 1px 1px 3px black;
+}
+
+.mensaje__titulo {
+    font-size: 22px;
+}
+
+#mensaje p {
+    margin-top: 7px;
+}
+
+/* MOBILE BREAKPOINT */
+
+@media screen and (max-width: 767px) {
+    header {
+        background-size: cover;
+    }
+
+    header .header__nav .nav__logo {
+        margin: 20px;
+    }
+
+    header .header__nav .nav__navbar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: rgb(0,128,128);
+        background: linear-gradient(90deg, rgba(0,128,128,1) 0%, rgba(98,182,170,1) 50%, rgba(0,128,128,1) 100%);
+        z-index: 2;
+        transition: right .9s ease-out;
+    }
+
+    header .header__nav .nav__navbar li {
+        width: 100%;
+        padding: 25px;
+        margin: 10px 0px;
+        font-size: 33px;
+        text-align: center;
+        border-radius: 20px;
+        border-bottom: 5px solid teal;
+        background: linear-gradient(90deg, rgba(0,128,128,1) 0%, rgba(98,182,170,1) 50%, rgba(0,128,128,1) 100%);
+        box-shadow: 1px 10px 2px silver;
+    }
+
+    header .header__nav .nav__navbar .close {
+        display: block;
+        width: 30px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border-radius: 50px;
+        border: 2px solid silver
+    }
+
+    header .header__nav .open {
+        display: block;
+        margin: 10px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    #navbar:target {
+        right: 0%;
+    }
+
+    header .header__banner {
+        width: 80%;
+        height: 60vh;
+        margin: 25% auto;
+        justify-content: center;
+    }
+
+    header .header__banner .banner__titulo {
+        font-size: 2.5rem 
+    }
+
+    header .header__banner .banner__descripcion {
+        font-size: 1.3rem
+    }
+
+    .cotizacion__formulario {
+        width: 100%;
+    }
+
+    .cotizacion__formulario #div-ubicacion {
+        flex-direction: column
+    }
+
+    #mensaje {
+        width: 80%;
+    }
+}
+
+/* TABLET BREAKPOINT */
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    header {
+        background-size: cover;
+    }
+
+    .header__banner {
+        width: 80%;
+        margin: 20% auto;
+    }
+
+    .header__banner .banner__titulo {
+        font-size: 3.2rem
+    }
+
+    .header__banner .banner__descripcion {
+        font-size: 2.1rem
+    }
+
+    .header__banner .banner__button {
+        margin: 15% auto
+    }
+
+    .cotizacion__formulario {
+        width: 90%
+    }
 }
