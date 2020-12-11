@@ -1,6 +1,7 @@
 /*
 Colores 
-rgba(0, 127, 255, 0.8)
+#FFC300
+rgb(192,57,43)
 rgb(0, 128, 128)
 rgb(129, 207, 11)
 */
@@ -81,10 +82,19 @@ header {
     height: 100vh;
     background-image: url(../images/pintura3.jpg);
     background-size: cover;
+    background-position: center;
     position: relative;
     background-color: black;
     transition: height 1s linear;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center
+}
 
+.espacio {
+    width: 100%;
+    height: 5vh;
 }
 
 .animacion {
@@ -94,12 +104,8 @@ header {
 
 .header__nav {
     width: 100%;
-    /*height: 80px;*/
     display: flex;
     justify-content: space-between;
-    /*background: rgb(255,255,255);
-    background: linear-gradient(69deg, rgba(255,255,255,0) 38%, rgba(0,128,128,0.5088410364145659) 48%, rgba(0,128,128,1) 100%);*/
-    /**/
 }
 
 header .open,
@@ -123,7 +129,6 @@ header .close {
     justify-content: space-around;
     align-items: center;
     list-style: none;
-    font-size: 18px;
     font-size: 20px;
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,128,128,0.5088410364145659) 9%, rgba(0,128,128,1) 100%);
@@ -143,20 +148,18 @@ header .close {
 
 .header__banner {
     width: 55%;
-    margin: 9% 20%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .header__banner .banner__titulo {
-    font-size: 2.7em;
-    /*line-height: 6vh;*/
+    font-size: 43px;
     padding: 10px 0px
 }
 
 .header__banner .banner__descripcion {
     margin-top: 5px;
+    font-size: 25px;
 }
 
 .header__banner .banner__button {
@@ -223,11 +226,6 @@ header .close {
     text-shadow: 1px 1px 5px black;
 }
 
-/*
-.cotizacion {
-    margin: 20px auto;
-}*/
-
 .cotizacion__titulo {
     font-size: 22px;
     line-height: 8vh;
@@ -247,8 +245,6 @@ header .close {
     height: 40px;
     padding: 5px 10px;
     margin: 10px 0px;
-    /*background-image: url(../images/pintura3.jpg);
-    background-size: 1500px;*/
     border: solid 0.1px rgba(0, 128, 128, 0.5);
     box-shadow: 0px 0px 3px rgba(0, 128, 128, 0.5);
 
@@ -265,16 +261,7 @@ header .close {
 .cotizacion__formulario .input-select label {
     width: 25%;
     padding-right: 5px;
-    
-    
 }
-
-/* Para responsive
-label.error {
-    margin-top: 10px
-}
-*/
-
 
 .cotizacion__formulario .input-select select {
     width: 75%;
@@ -307,9 +294,7 @@ label.error {
     height: initial;
     padding: 0px;
     margin: 0px;
-    /**/
     margin-left: 20px;
-    /**/
     border: none;
     box-shadow: none;
 }
@@ -362,12 +347,6 @@ input[type='radio']:checked:after {
     border: 2px solid white;
 }
 
-/*
-.cotizacion__formulario #servicios span {
-    width: 70%;
-    margin-left: 10px;
-}*/
-
 .cotizacion__formulario #div-ubicacion {
     display: flex;
     flex-wrap: wrap;
@@ -383,10 +362,6 @@ input[type='radio']:checked:after {
     border: solid 0.1px rgba(0, 128, 128, 0.5);
     box-shadow: 0px 0px 3px rgba(0, 128, 128, 0.5);
     resize: none;
-}
-
-fieldset {
-  display: none;  
 }
 
 .cotizacion__formulario .formulario__item--submit {
@@ -438,10 +413,6 @@ fieldset {
 /* MOBILE BREAKPOINT */
 
 @media screen and (max-width: 767px) {
-    header {
-        background-size: cover;
-    }
-
     header .header__nav .nav__logo {
         margin: 20px;
     }
@@ -497,21 +468,29 @@ fieldset {
 
     header .header__banner {
         width: 80%;
-        height: 60vh;
-        margin: 25% auto;
+        margin: auto;
         justify-content: center;
     }
 
     header .header__banner .banner__titulo {
-        font-size: 2.5rem 
+        font-size: 40px
     }
 
     header .header__banner .banner__descripcion {
-        font-size: 1.3rem
+        font-size: 20px
+    }
+
+    header .header__banner .banner__button {
+        max-width: 100%;
+        height: 80px;
     }
 
     .cotizacion__formulario {
         width: 100%;
+    }
+
+    .cotizacion__formulario #div-tipo {
+        justify-content: space-around
     }
 
     .cotizacion__formulario #div-ubicacion {
@@ -526,25 +505,19 @@ fieldset {
 /* TABLET BREAKPOINT */
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-    header {
-        background-size: cover;
+    
+    .header__nav .nav__navbar {
+        width: 70%
     }
 
     .header__banner {
-        width: 80%;
-        margin: 20% auto;
+        width: 70%;
+        height: 50%;
+        /*margin: 30% auto;*/
     }
 
-    .header__banner .banner__titulo {
-        font-size: 3.2rem
-    }
-
-    .header__banner .banner__descripcion {
-        font-size: 2.1rem
-    }
-
-    .header__banner .banner__button {
-        margin: 15% auto
+    header .espacio {
+        height: 0px;
     }
 
     .cotizacion__formulario {

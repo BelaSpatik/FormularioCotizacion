@@ -5,22 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizá tu proyecto | Solución a tu Lugar</title>
     <link rel="stylesheet" href="css/jquery-validation-demo.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/select2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="css/estilos.css">
     <script src="js/jquery.js"></script>
-    <script src="js/jquery-validate-min.js"></script>
-    <script src="js/jquery-validate-additional-methods-min.js"></script>
-    <script src="js/select2.min.js"></script>
+    <script src="js/plugins/jquery-validate-min.js"></script>
+    <script src="js/plugins/jquery-validate-additional-methods-min.js"></script>
+    <script src="js/plugins/select2.min.js"></script>
     <script src="js/servicios.js"></script>
-<!--<script defer src="js/mainjquery.js"></script>-->
-<script defer src="js/mainajax2.js"></script>
+    <script defer src="js/main.js"></script>
 </head>
 <body>
     <header>
-            <nav class="header__nav">
-                <img class="nav__logo animate__animated animate__tada animate__slow" src="images/logo5.png" alt="logo">
+        <nav class="header__nav">
+            <img class="nav__logo animate__animated animate__tada animate__slow" src="images/logo5.png" alt="logo">
             <a href="#navbar"><img src="images/menu1.png" class="open" alt="menu"></a>
             <ul class="nav__navbar" id="navbar">
                 <a href="#"><img src="images/cross2.png" class="close" alt="cerrar"></a>
@@ -40,13 +38,14 @@
         </nav>
         <div class="header__banner">
             <h1 class="banner__titulo animate__animated animate__pulse">¿Querés cotizar tu próximo proyecto?</h1>
-        <h2 class="banner__descripcion animate__animated animate__slideInUp animate__slow">Completá el siguiente formulario con tus datos y en los próximos días nos estaremos comunicando para acercarte una cotización aproximada.</h2>
-        <button class="banner__button <!--animate__animated animate__fadeIn animate__slow-->">
-            <img class="left" src="images/3.png">
-            <span>Empezar</span>
-            <img class="right" src="images/4.png">
-        </button>
+            <h2 class="banner__descripcion animate__animated animate__slideInUp animate__slow">Completá el siguiente formulario con tus datos y en los próximos días nos estaremos comunicando para acercarte una cotización aproximada.</h2>
+            <button class="banner__button">
+                <img class="left" src="images/arrowleft.png">
+                <span>Empezar</span>
+                <img class="right" src="images/arrowright.png">
+            </button>
         </div>
+        <div class="espacio"></div>
     </header>
     <section class="cotizacion">
         <form name="myForm" class="cotizacion__formulario" action="" method="POST">
@@ -62,8 +61,7 @@
             </div>
             <div id="div-rubros" class="formulario__item--datosCs input-select">
                 <label for="rubro"><b>Especifique el rubro de consulta</b></label>
-                <select name="rubros" id="rubros">
-                </select>
+                <select name="rubros" id="rubros"></select>
             </div>
             <div id="div-tipo" class="formulario__item--datosCs input-radio">
                 <label for="nuevo">Obra Nueva
@@ -90,7 +88,7 @@
             <div class="formulario__item--datosCs">
                 <input type="text" name="dimension" id="dimension" placeholder="Dimensión (metros²)*">
             </div>
-            <div class="formulario__item--datosCs">
+            <div id="div-comentario" class="formulario__item--datosCs">
                 <textarea name="comentario" id="comentario" cols="30" rows="10" placeholder="Comentarios que deseé agregar..."></textarea>
             </div>
             <div id="carga" class="formulario__item--submit">
@@ -99,7 +97,5 @@
         </form>
     </section>
     <section class="animate__animated animate__pulse" id="mensaje"></section>
-    <footer>
-    </footer>
 </body>
 </html>
